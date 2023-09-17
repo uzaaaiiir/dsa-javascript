@@ -43,30 +43,47 @@ class LinkedList {
     }
 
     pop() {
-        if (this.head === null) {
-            throw new Error("List is empty.");
+        if (!this.head) return undefined;
+
+        let temp = this.head;
+        let pre = this.head;
+
+        while (temp.next) {
+            pre = temp;
+            temp = temp.next;
         }
 
-        if (this.length === 1) {
-            const node = this.tail;
+        this.tail = pre;
+        this.tail.next = null;
+        this.length--;
+
+        if (this.length === 0) {
             this.head = null;
             this.tail = null;
-            this.length--;
-            return node;
         }
 
-        const nodeToRemove = this.tail;
-        let presentNode = this.head;
-        for (let i = 0; i < this.length; i++) {
-            presentNode = presentNode.next;
-            if (presentNode.next === nodeToRemove) {
-                presentNode.next = null;
-                this.tail = presentNode;
-                this.length--;
-                break;
-            }
+        return temp;
+    }
+
+    unshift(value) {
+        const node = new Node(value);
+
+        if (!this.head) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            node.next = this.head;
+            this.head = node;
         }
 
-        return nodeToRemove;
+        this.length++;
+
+        return this;
     }
 }
+
+const list = new LinkedList(11);
+list.push(23);
+list.push(7);
+list.unshift(4);
+console.log(list);
