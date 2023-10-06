@@ -116,25 +116,37 @@ class DoublyLinkedList {
      * @returns Node
      */
     get(index) {
-        if (!this.head || index >= this.length) return undefined;
+        if (!this.head || index >= this.length || index < 0) return undefined;
 
         let temp = this.head;
-        for (let i = 0; i < index - 1; i++) {
-            temp = temp.next;
+        if (index < this.length / 2) {
+            for (let i = 0; i < index; i++) {
+                temp = temp.next;
+            }
+        } else {
+            temp = this.tail;
+            for (let i = this.length - 1; i > index; i--) {
+                temp = temp.prev;
+            }
         }
 
-        return temp.value;
+        return temp;
     }
 
     /**
      * Method replaces a value of a Node at the specified index.
      * @param {int} index
      * @param {any} value
-     * @returns DoublyLinkedList
+     * @returns boolean - returning if the value was set
      */
     set(index, value) {
-        if (!this.head) return undefined;
-        return this;
+        let temp = this.get(index);
+
+        if (temp) {
+            temp.value = value;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -144,7 +156,26 @@ class DoublyLinkedList {
      * @returns DoublyLinkedList
      */
     insert(index, value) {
-        if (index < this.length) return undefined;
+        if (!this.head || index > this.length || index < 0) return undefined;
+
+        if (index === this.length) return this.push(value);
+
+        if (index === 0) return this.unshift(value);
+
+        // Create new node
+        const node = new Node(value);
+
+        // Re-arrange existing node
+        const next = this.get(index);
+        const temp = next.prev;
+        temp.next = node;
+        next.prev = node;
+
+        // Set new node next & prev
+        node.prev = temp;
+        node.next = next;
+
+        this.length++;
         return this;
     }
 
@@ -173,5 +204,5 @@ class DoublyLinkedList {
 let list = new DoublyLinkedList(7);
 list.push(12);
 list.unshift(343);
-console.log(list.get(2));
-// list.print();
+list.insert(0, 555);
+list.print();
