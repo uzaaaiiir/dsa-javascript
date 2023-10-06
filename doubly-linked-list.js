@@ -167,12 +167,12 @@ class DoublyLinkedList {
 
         // Re-arrange existing node
         const next = this.get(index);
-        const temp = next.prev;
-        temp.next = node;
+        const prev = next.prev;
+        prev.next = node;
         next.prev = node;
 
         // Set new node next & prev
-        node.prev = temp;
+        node.prev = prev;
         node.next = next;
 
         this.length++;
@@ -185,7 +185,19 @@ class DoublyLinkedList {
      * @returns Node
      */
     remove(index) {
-        if (index < this.head) return undefined;
+        if (!this.head || index < 0 || index >= this.length) return undefined;
+
+        if (index === 0) return this.shift();
+
+        if (index === this.length - 1) return this.pop();
+
+        const temp = this.get(index);
+        temp.prev.next = temp.next;
+        temp.next.prev = temp.prev;
+        temp.next = temp.prev = null;
+
+        this.length--;
+        return temp;
     }
 
     print() {
@@ -204,5 +216,5 @@ class DoublyLinkedList {
 let list = new DoublyLinkedList(7);
 list.push(12);
 list.unshift(343);
-list.insert(0, 555);
+list.remove(1);
 list.print();
