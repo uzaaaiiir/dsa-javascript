@@ -23,6 +23,10 @@ class LinkedList {
         }
     }
 
+    getLength() {
+        return this.length;
+    }
+
     /**
      * Method pushes a Node to the end of the list.
      * @param {*} value
@@ -251,22 +255,24 @@ class LinkedList {
     }
 }
 
-const list = new LinkedList(11);
-list.push(5);
-list.push(332);
-list.push(15);
-list.push(432);
-list.push(10);
+// const list = new LinkedList(11);
+// list.push(5);
+// list.push(332);
+// list.push(15);
+// list.push(432);
+// list.push(10);
 
-console.log(list.reverse());
-console.log(list);
-console.log(
-    list.get(0).value,
-    list.get(1).value,
-    list.get(2).value,
-    list.get(3).value,
-    list.get(4).value,
-    list.get(5).value
-);
+// console.log(list.reverse());
+// console.log(list);
+// console.log(
+//     list.get(0).value,
+//     list.get(1).value,
+//     list.get(2).value,
+//     list.get(3).value,
+//     list.get(4).value,
+//     list.get(5).value
+// );
 
-list.printList();
+// list.printList();
+
+module.exports.LinkedList = LinkedList;
