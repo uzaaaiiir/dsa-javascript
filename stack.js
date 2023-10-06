@@ -10,6 +10,11 @@ class Node {
 
 /**
  * Class representing a Stack.
+ * - When representing stack, we need to add and remove from beginning
+ * of stack if using a singly linked list. Otherwise, we need to traverse
+ * entire list to remove or add item and would be O(n).
+ * - If using singly-linked list, adding/removing from beginning is O(1).
+ * - If using array, adding/removing from end is O(1). From beginning is O(n).
  */
 class Stack {
     top;
