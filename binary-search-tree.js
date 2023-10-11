@@ -14,5 +14,27 @@
  * Binary Search Tree (BST)
  * - If value is greater than parent node, it goes to the right, otherwise to the left.
  * - Perfect Tree has 2^n -1 nodes - where n is the height
- * - O(logn) = O(h) to find, add, remove [divide and conquer]
+ * - BEST CASE: O(logn) = O(h) to find, add, remove [divide and conquer]
+ * - WORST CASE: O(n) - all items are larger than parent node becomes linked list (47 -> 76 -> 82 ->  91)
  */
+
+class Node {
+    left;
+    right;
+    value;
+
+    constructor(value) {
+        if (value !== null && value !== undefined) {
+            this.value = value;
+            this.left = this.right = null;
+        }
+    }
+}
+
+class BinarySearchTree {
+    root;
+
+    constructor() {
+        this.root = null;
+    }
+}
