@@ -64,13 +64,49 @@ class BinarySearchTree {
             }
         }
     }
+
+    contains(value) {
+        if (!this.root) return false;
+
+        let temp = this.root;
+        while (temp) {
+            if (value === temp.value) return true;
+
+            temp = value < temp.value ? temp.left : temp.right;
+        }
+
+        return false;
+    }
+
+    minimum() {
+        if (!this.root) return undefined;
+
+        let temp = this.root;
+        while (temp.left) {
+            temp = temp.left;
+        }
+
+        return temp;
+    }
+
+    minValueNode(currentNode) {
+        while (currentNode.left) {
+            currentNode = currentNode.left;
+        }
+
+        return currentNode;
+    }
 }
 
 const bst = new BinarySearchTree();
 bst.insert(47);
 bst.insert(21);
 bst.insert(76);
-bst.insert(18);
+bst.insert(8);
 bst.insert(52);
 bst.insert(82);
+console.log(bst.contains(52));
+console.log(bst.minimum());
+console.log(bst.minValueNode(bst.root));
+console.log(bst.minValueNode(bst.root.right));
 console.log(bst);
