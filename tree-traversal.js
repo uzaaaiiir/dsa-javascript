@@ -89,6 +89,7 @@ function DFSPreOrder(bst) {
     }
 
     traverse(bst.root);
+    return results;
 }
 
 /**
@@ -96,11 +97,35 @@ function DFSPreOrder(bst) {
  * - Visit left, right, then middle
  */
 
+function DFSPostOrder(bst) {
+    let results = [];
+    function traverse(currentNode) {
+        if (currentNode.left) traverse(currentNode.left);
+        if (currentNode.right) traverse(currentNode.right);
+        results.push(currentNode.value);
+    }
+
+    traverse(bst.root);
+    return results;
+}
+
 /**
  * IN-ORDER
  * - Visit left first, then middle, then right until all are visited
  * - As we visit them, we add to visited array. Then once completed, add to results.
  */
+function DFSInOrder(bst) {
+    let results = [];
+
+    function traverse(currentNode) {
+        if (currentNode.left) traverse(currentNode.left);
+        results.push(currentNode.value);
+        if (currentNode.right) traverse(currentNode.right);
+    }
+
+    traverse(bst.root);
+    return results;
+}
 
 const bst = new BinarySearchTree();
 // Tree: 47, 21, 76, 18, 27, 52, 82
@@ -113,3 +138,4 @@ bst.insert(52);
 bst.insert(82);
 // console.log(bst.DFSPreOrder());
 console.log(DFSPreOrder(bst));
+console.log(DFSPostOrder(bst));
