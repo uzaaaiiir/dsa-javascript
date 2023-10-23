@@ -119,12 +119,37 @@ class BinarySearchTree {
         let results = [];
         function traverse(currentNode) {
             results.push(currentNode.value);
-            console.log(results);
             if (currentNode.left) traverse(currentNode.left);
             if (currentNode.right) traverse(currentNode.right);
         }
 
         traverse(this.root);
+        return results;
+    }
+
+    DFSPostOrder() {
+        let results = [];
+        function traverse(currentNode) {
+            if (currentNode.left) traverse(currentNode.left);
+            if (currentNode.right) traverse(currentNode.right);
+            results.push(currentNode.value);
+        }
+
+        traverse(this.root);
+        return results;
+    }
+
+    DFSInOrder() {
+        let results = [];
+
+        function traverse(currentNode) {
+            if (currentNode.left) traverse(currentNode.left);
+            results.push(currentNode.value);
+            if (currentNode.right) traverse(currentNode.right);
+        }
+
+        traverse(this.root);
+        return results;
     }
 }
 
@@ -138,12 +163,17 @@ const test = () => {
     bst.insert(27);
     bst.insert(52);
     bst.insert(82);
-    console.log(bst.contains(52));
-    console.log(bst.minimum());
-    console.log(bst.minValueNode(bst.root));
-    console.log(bst.minValueNode(bst.root.right));
-    console.log(bst.BFS());
-    console.log(bst);
+    // console.log(bst.contains(52));
+    // console.log(bst.minimum());
+    // console.log(bst.minValueNode(bst.root));
+    // console.log(bst.minValueNode(bst.root.right));
+    // console.log(bst.BFS());
+    // console.log(bst);
+    console.log(bst.DFSPreOrder()); // expected 47 21 18 27 76 52 82
+    console.log(bst.DFSPostOrder()); // expected 18 27 21 52 82 76 47
+    console.log(bst.DFSInOrder()); // expected 18 21 27 47 52 76 82
 };
+
+test();
 
 module.exports.BinarySearchTree = BinarySearchTree;
