@@ -50,11 +50,17 @@ function BFS(bst) {
     queue.push(currentNode);
 
     while (queue.length) {
+        // If items are in queue, remove the first item
         currentNode = queue.shift();
+
+        // Add item to the results queue
         results.push(currentNode.value);
 
+        // Add the right and left child of the node moved to the queue
         if (currentNode.left) queue.push(currentNode.left);
         if (currentNode.right) queue.push(currentNode.right);
+
+        // Will continue until all items have been evaluated
     }
 
     return results;
@@ -67,6 +73,35 @@ function BFS(bst) {
  * - In-Order: left, middle, right
  */
 
+/**
+ * PRE-ORDER
+ * - Pre-order goes middle node, then left (evaluates all left), then right
+ * - Recursive solution
+ */
+
+function DFSPreOrder(bst) {
+    let results = [];
+    function traverse(currentNode) {
+        results.push(currentNode.value);
+        console.log(results);
+        if (currentNode.left) traverse(currentNode.left);
+        if (currentNode.right) traverse(currentNode.right);
+    }
+
+    traverse(bst.root);
+}
+
+/**
+ * POST-ORDER
+ * - Visit left, right, then middle
+ */
+
+/**
+ * IN-ORDER
+ * - Visit left first, then middle, then right until all are visited
+ * - As we visit them, we add to visited array. Then once completed, add to results.
+ */
+
 const bst = new BinarySearchTree();
 // Tree: 47, 21, 76, 18, 27, 52, 82
 bst.insert(47);
@@ -76,4 +111,5 @@ bst.insert(18);
 bst.insert(27);
 bst.insert(52);
 bst.insert(82);
-console.log(bst.BFS());
+// console.log(bst.DFSPreOrder());
+console.log(DFSPreOrder(bst));
