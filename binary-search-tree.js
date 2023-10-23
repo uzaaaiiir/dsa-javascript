@@ -96,17 +96,42 @@ class BinarySearchTree {
 
         return currentNode;
     }
+
+    BFS() {
+        let currentNode = this.root;
+        let queue = [];
+        let results = [];
+
+        queue.push(currentNode);
+
+        while (queue.length) {
+            currentNode = queue.shift();
+            results.push(currentNode.value);
+
+            if (currentNode.left) queue.push(currentNode.left);
+            if (currentNode.right) queue.push(currentNode.right);
+        }
+
+        return results;
+    }
 }
 
-const bst = new BinarySearchTree();
-bst.insert(47);
-bst.insert(21);
-bst.insert(76);
-bst.insert(8);
-bst.insert(52);
-bst.insert(82);
-console.log(bst.contains(52));
-console.log(bst.minimum());
-console.log(bst.minValueNode(bst.root));
-console.log(bst.minValueNode(bst.root.right));
-console.log(bst);
+const test = () => {
+    const bst = new BinarySearchTree();
+    // Tree: 47, 21, 76, 18, 27, 52, 82
+    bst.insert(47);
+    bst.insert(21);
+    bst.insert(76);
+    bst.insert(18);
+    bst.insert(27);
+    bst.insert(52);
+    bst.insert(82);
+    console.log(bst.contains(52));
+    console.log(bst.minimum());
+    console.log(bst.minValueNode(bst.root));
+    console.log(bst.minValueNode(bst.root.right));
+    console.log(bst.BFS());
+    console.log(bst);
+};
+
+module.exports.BinarySearchTree = BinarySearchTree;
