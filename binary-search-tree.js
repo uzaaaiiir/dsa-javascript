@@ -114,6 +114,18 @@ class BinarySearchTree {
 
         return results;
     }
+
+    DFSPreOrder() {
+        let results = [];
+        function traverse(currentNode) {
+            results.push(currentNode.value);
+            console.log(results);
+            if (currentNode.left) traverse(currentNode.left);
+            if (currentNode.right) traverse(currentNode.right);
+        }
+
+        traverse(this.root);
+    }
 }
 
 const test = () => {
