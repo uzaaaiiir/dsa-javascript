@@ -134,6 +134,11 @@ function merge(arr1, arr2) {
  * - Now all items to the left of pivot are less than and all items to the right are greater than
  * - Now we recursively run quick sort until sorted
  *
+ * Space Complexity: O(1)
+ * Time Complexity:
+ * - Best Case: O(n*log(n))
+ * - Worst Case: O(n^2)
+ *
  * PIVOT
  * - Pivot function finds the pivot item and sorts the items less than and greater than and puts the pivot between them
  * -
