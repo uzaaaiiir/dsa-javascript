@@ -68,6 +68,9 @@ function insertionSort(arr) {
  * - Then combines the single item arrays into an ordered array
  * - Continues to combine until we have a single sorted array
  *
+ * Space complexity: O(n)
+ * Time Complexity: O(n*log(n))
+ *
  * Example:
  * [5, 4, 7, 1, 3, 2, 8, 6]
  * -> [5, 4, 7, 1][3, 2, 8, 6]
@@ -122,12 +125,58 @@ function merge(arr1, arr2) {
     return combined;
 }
 
+/**
+ * QUICK SORT
+ * - Have a pivot point, and we compare every item to the pivot point
+ * - If we find an item less than, we exchange it with the first item greater than
+ * - We find all the items less than the pivot, and exchange it with the first item greater than
+ * - Then we put the pivot in the location
+ * - Now all items to the left of pivot are less than and all items to the right are greater than
+ * - Now we recursively run quick sort until sorted
+ *
+ * PIVOT
+ * - Pivot function finds the pivot item and sorts the items less than and greater than and puts the pivot between them
+ * -
+ */
+
+function quickSort(arr, left = 0, right = arr.length - 1) {
+    if (left < right) {
+        let pivotIndex = pivot(arr, left, right);
+        quickSort(arr, left, pivotIndex - 1);
+        quickSort(arr, pivotIndex + 1, right);
+    }
+
+    return arr;
+}
+
+function pivot(arr, pivotIndex = 0, endIndex = arr.length - 1) {
+    let swapIndex = pivotIndex;
+    for (let i = pivotIndex + 1; i <= endIndex; i++) {
+        if (arr[i] < arr[pivotIndex]) {
+            swapIndex++;
+            swap(arr, swapIndex, i);
+        }
+    }
+
+    swap(arr, pivotIndex, swapIndex);
+    return swapIndex;
+}
+
+function swap(arr, index1, index2) {
+    let temp = arr[index1];
+    arr[index1] = arr[index2];
+    arr[index2] = temp;
+}
+
 // TESTING
 console.log(bubbleSort([5, 7, 1, 23, 14, 12, 12]));
 console.log(selectionSort([5, 7, 1, 23, 14, 12, 12]));
 console.log(insertionSort([5, 7, 1, 23, 14, 12, 12]));
 
-// Test Merge
+// Test Merge & Merge Sort
 console.log(merge([1, 5, 7], [1, 3, 8]));
 console.log(mergeSort([5, 7, 1, 23, 14, 12, 12]));
 console.log(mergeSort([5, 7, 1, 23, 14, 12, 54, 12]));
+
+// Testing Quick sort
+console.log(quickSort([5, 7, 1, 23, 14, 12, 54, 12]));
