@@ -1,14 +1,18 @@
 {
-  "name": "dev",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "jest": {
-    "testEnvironment": "node"
-  },
-  "author": "stephen grider",
-  "license": "ISC"
+    "name": "dev",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "jest",
+        "test:palindrome": "jest palindrome/test.js"
+    },
+    "jest": {
+        "testEnvironment": "node"
+    },
+    "author": "stephen grider",
+    "license": "ISC",
+    "devDependencies": {
+        "jest": "^29.7.0"
+    }
 }
